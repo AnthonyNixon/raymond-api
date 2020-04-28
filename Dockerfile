@@ -16,6 +16,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -o /raymond-api cmd/app/main.go
 FROM alpine
 
 COPY --from=binary_builder /raymond-api /raymond-api
+COPY --from=build_base /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 ENV GIN_MODE=release
 ENV PORT=8080
 EXPOSE 8080
